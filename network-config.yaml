@@ -1,3 +1,4 @@
+defaultVpc: delete
 endpointPolicies: []
 
 transitGateways:
@@ -5,7 +6,7 @@ transitGateways:
     account: Network
     region: eu-west-1
     asn: 65000
-    autoAcceptSharedAttachments: enable
+    autoAcceptSharingAttachments: enable
     routeTables: []
     shareTargets:
       organizationalUnits:
@@ -37,6 +38,7 @@ vpcs:
       - name: Egress-TGW-Attach
         transitGateway:
           name: Central-TGW
+          account: Network
         subnets: 
           - TGW-Subnet
         applianceModeSupport: enable
@@ -60,6 +62,7 @@ vpcs:
       - name: PAD-Prod-TGW-Attach
         transitGateway:
           name: Central-TGW
+          account: Network
         subnets:
           - TGW-Subnet
     routeTables:
@@ -84,6 +87,8 @@ centralNetworkServices:
     rules: []
     policies:
       - name: AnPost-Central-Firewall-Policy
+        regions:
+          - eu-west-1
         statelessDefaultActions: ['aws:forward_to_sfe']
         statelessFragmentDefaultActions: ['aws:forward_to_sfe']
         statefulRuleGroups: []
