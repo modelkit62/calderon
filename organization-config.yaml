@@ -58,3 +58,4 @@ organizationalUnits:
   - name: Sandbox
     parent: Workloads
   - name: Suspended
+    ignore: true
