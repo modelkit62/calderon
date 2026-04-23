@@ -11,48 +11,53 @@
 
 # AWS Config configuration for resource auditing
 awsConfig:
-  enable: true
+  # Requerido por el error: 'enableConfigurationRecorder'
+  enableConfigurationRecorder: true
   aggregation:
-    # Information is consolidated in the Audit account
+    # Requerido por el error: la agregación necesita su propio 'enable'
+    enable: true
     delegatedAdminAccount: Audit
 
-# Centralized security services configuration
 centralSecurityServices:
-  # Enables security services management through delegated Audit account
   delegatedAdminAccount: Audit
 
-  # Amazon Elastic Block Store Encryption (Aligns with encryption at rest requirement)
   ebsDefaultVolumeEncryption:
     enable: true
     excludeRegions: []
 
-  # Amazon Simple Storage Service Public Access block
   s3PublicAccessBlock:
     enable: true
     excludeAccounts: []
 
-  # Service Control Policies (SCPs) integrity enforcement
   scpRevertChangesConfig:
     enable: true
 
-  # Note: Amazon Macie is omitted as no PII is processed by the PAD platform.
+  # Requerido por el esquema, aunque no lo uses, debes ponerlo explícitamente en 'false'
+  macie:
+    enable: false
 
-  # Continuous threat detection using native AWS telemetry
   guardduty:
     enable: true
     exportConfiguration:
       enable: true
-      # Immutable export to the Log Archive account for long-term retention
-      destination: LogArchive
+      # Requeridos por el error: destinationType y exportFrequency
+      destinationType: S3
+      exportFrequency: FIFTEEN_MINUTES
     s3Protection:
       enable: true
 
-  # Central panel for security posture and compliance
   securityHub:
     enable: true
     regionAggregation: true
     standards:
-      # Activation of recommended foundational AWS security standards
       - name: AWS Foundational Security Best Practices v1.0.0
         enable: true
 
+  # Requerido por el error: ssmAutomation debe estar definido
+  ssmAutomation:
+    enable: true
+
+# Requerido por el error en la raíz del documento
+cloudWatch:
+  encryption:
+    enabled: true
