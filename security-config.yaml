@@ -10,16 +10,20 @@
 # Project: An Post Eircode Service Take-on (Test Environment)
 # -----------------------------------------------------------------------------------------
 
-# AWS Config configuration for resource auditing
 awsConfig:
   enableConfigurationRecorder: true
   aggregation:
     enable: true
     delegatedAdminAccount: Audit
 
-# AÑADIDO: El validador exige una política de contraseñas por defecto
+# ¡NUEVO! Añadido Access Analyzer para calmar al validador
+accessAnalyzer:
+  enable: false
+
+# ¡CORREGIDO! Con las variables exactas que pedía el log
 iamPasswordPolicy:
-  requireMinimumLength: 14
+  minimumPasswordLength: 14
+  hardExpiry: false
   passwordReusePrevention: 24
   requireLowercaseCharacters: true
   requireNumbers: true
@@ -44,7 +48,6 @@ centralSecurityServices:
 
   macie:
     enable: false
-    # AÑADIDO: Exigencia del validador aunque Macie esté en false
     publishSensitiveDataFindings: false
 
   guardduty:
@@ -65,11 +68,11 @@ centralSecurityServices:
 
   ssmAutomation:
     enable: true
-    # AÑADIDO: Exigencia del validador (lista vacía)
     documentSets: []
 
 cloudWatch:
   encryption:
     enabled: true
-  # AÑADIDO: Exigencia del validador (lista vacía)
   alarmSets: []
+  # ¡NUEVO! Añadido para calmar al validador
+  metricSets: []

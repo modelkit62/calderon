@@ -10,11 +10,15 @@
 # -----------------------------------------------------------------------------------------
 enable: true
 
+# ¡NEW!
+taggingPolicies: []
+
 # Service Control Policies (SCPs) definition
 serviceControlPolicies:
   - name: Quarantine-DenyAll-SCP
     description: "Strict SCP explicitly denies all access to these accounts except for designated Admin and Security staff."
     policy: service-control-policies/quarantine-deny-all.json
+    type: customerManaged # ¡NUEVO! Campo obligatorio
     deploymentTargets:
       organizationalUnits:
         - Quarantine
@@ -22,6 +26,7 @@ serviceControlPolicies:
   - name: Enforce-Mandatory-Tags-SCP
     description: "Enforces comprehensive Tagging Policy from Day 1 (CostCentre, Environment, Owner)."
     policy: service-control-policies/require-mandatory-tags.json
+    type: customerManaged # ¡NUEVO! Campo obligatorio
     deploymentTargets:
       organizationalUnits:
         - Security
