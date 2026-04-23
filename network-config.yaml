@@ -1,9 +1,12 @@
+endpointPolicies: []
+
 transitGateways:
   - name: Central-TGW
     account: Network
     region: eu-west-1
     asn: 65000
     autoAcceptSharedAttachments: enable
+    routeTables: []
     shareTargets:
       organizationalUnits:
         - Infrastructure
@@ -32,7 +35,8 @@ vpcs:
         availabilityZone: 'a'
     transitGatewayAttachments:
       - name: Egress-TGW-Attach
-        transitGateway: Central-TGW
+        transitGateway:
+          name: Central-TGW
         subnets: 
           - TGW-Subnet
         applianceModeSupport: enable
@@ -54,7 +58,8 @@ vpcs:
         ipv4CidrBlock: 10.100.3.0/24
     transitGatewayAttachments:
       - name: PAD-Prod-TGW-Attach
-        transitGateway: Central-TGW
+        transitGateway:
+          name: Central-TGW
         subnets:
           - TGW-Subnet
     routeTables:
@@ -63,7 +68,8 @@ vpcs:
           - Private-Subnet-App
           - Private-Subnet-Data
         routes:
-          - destination: 0.0.0.0/0
+          - name: Default-Route-To-TGW
+            destination: 0.0.0.0/0
             target: Central-TGW
     vpcEndpoints:
       - service: s3
@@ -73,7 +79,14 @@ vpcs:
         policy: vpc-endpoint-policies/s3-gateway-endpoint-policy.json
 
 centralNetworkServices:
+  delegatedAdminAccount: Network
   networkFirewall:
+    rules: []
+    policies:
+      - name: AnPost-Central-Firewall-Policy
+        statelessDefaultActions: ['aws:forward_to_sfe']
+        statelessFragmentDefaultActions: ['aws:forward_to_sfe']
+        statefulRuleGroups: []
     firewalls:
       - name: AnPost-Central-Firewall
         account: Network
@@ -81,7 +94,4 @@ centralNetworkServices:
         vpc: Egress-VPC
         subnets:
           - Firewall-Subnet
-        firewallPolicy:
-          statelessDefaultActions: ['aws:forward_to_sfe']
-          statelessFragmentDefaultActions: ['aws:forward_to_sfe']
-          statefulRuleGroups: []
+        firewallPolicy: AnPost-Central-Firewall-Policy
