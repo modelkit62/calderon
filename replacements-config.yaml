@@ -12,9 +12,4 @@
 # Note: Optional file. Kept for compatibility with lza-universal-configuration
 # -----------------------------------------------------------------------------------------
 
-globalReplacements:
-  # Define simple global variables that could be used in other YAMLs in the future
-  - key: ProjectName
-    value: AnPostLandingZoneTest
-  - key: PrimaryEmailDomain
-    value: gmail.com
+globalReplacements: []
