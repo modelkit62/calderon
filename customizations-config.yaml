@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------------------------
+# AWS Landing Zone Accelerator - Customizations Configuration
+# Project: An Post Eircode Service Take-on (Test Environment)
+# -----------------------------------------------------------------------------------------
+
+customizations:
+  ssmDocuments:
+    # This specific name overrides the default Session Manager preferences
+    - name: SSM-SessionManagerRunShell
+      description: "Deploys secure Session Manager preferences for third-party access"
+      documentType: Command
+      documentFormat: JSON
+      document: ssm-documents/session-manager-prefs.json
+      # Deployed to all workloads (where PAD instances live)
+      deploymentTargets:
+        organizationalUnits:
+          - Workloads

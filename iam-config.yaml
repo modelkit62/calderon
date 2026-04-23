@@ -1,0 +1,78 @@
+########################################################################################################################################
+# For additional configurable services, features, and property descriptions,                                                           #
+# please review class GlobalConfig reference in our TypeDoc:                                                                           #
+# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#identity-and-access-management-iam-configuration #
+########################################################################################################################################
+
+# -----------------------------------------------------------------------------------------
+# AWS Landing Zone Accelerator - IAM Configuration
+# Project: An Post Eircode Service Take-on (Test Environment)
+# -----------------------------------------------------------------------------------------
+
+# Definition of custom policies (Customer-managed policies)
+policies:
+  - name: PAD-GeneralUser-Policy
+    policy: iam-policies/pad-general-user-policy.json
+
+# AWS IAM Identity Center (SSO) configuration
+identityCenter:
+  name: default
+  # Using native identity store for Phase 1 (no external IdP integration yet)
+  identityStore: native
+
+permissionSets:
+  # Roles for Security Operations team
+  - name: SecurityAuditor
+    description: "Federated SSO Role for Security Team to audit environments"
+    awsManagedPolicies:
+      - SecurityAudit
+
+  - name: LogViewer
+    description: "Federated SSO Role for Audit/Security Team to view logs"
+    awsManagedPolicies:
+      - AWSTrailAccessPolicy
+      - AmazonS3ReadOnlyAccess
+
+  # Roles for PAD team (Autoaddress)
+  - name: PAD-SuperUser
+    description: "PAD Superusers / Admins"
+    awsManagedPolicies:
+      - PowerUserAccess
+
+  - name: PAD-GeneralUser
+    description: "PAD General Users"
+    # Using a customer-managed policy as dictated by the HLD
+    customerManagedPolicies:
+      - PAD-GeneralUser-Policy
+
+# Group assignments to corresponding accounts and organizational units
+assignments:
+  - principalType: GROUP
+    principalName: SecurityTeam
+    permissionSetName: SecurityAuditor
+    deploymentTargets:
+      accounts:
+        - Audit
+  - principalType: GROUP
+    principalName: AuditTeam
+    permissionSetName: LogViewer
+    deploymentTargets:
+      accounts:
+        - LogArchive
+  - principalType: GROUP
+    principalName: PAD-Admins
+    permissionSetName: PAD-SuperUser
+    deploymentTargets:
+      organizationalUnits:
+        - Production
+        - Non-Production
+        - Sandbox
+  - principalType: GROUP
+    principalName: PAD-Users
+    permissionSetName: PAD-GeneralUser
+    deploymentTargets:
+      organizationalUnits:
+        - Production
+        - Non-Production
+        - Sandbox
+

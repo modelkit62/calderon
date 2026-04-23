@@ -1,0 +1,43 @@
+{
+  "tags": {
+    "CostCentre": {
+      "tag_key": {
+        "@@assign": "CostCentre"
+      },
+      "enforced_for": {
+        "@@assign": [
+          "ec2:instance",
+          "ec2:volume",
+          "rds:db",
+          "s3"
+        ]
+      }
+    },
+    "Environment": {
+      "tag_key": {
+        "@@assign": "Environment"
+      },
+      "enforced_for": {
+        "@@assign": [
+          "ec2:instance",
+          "ec2:volume",
+          "rds:db",
+          "s3"
+        ]
+      }
+    },
+    "Owner": {
+      "tag_key": {
+        "@@assign": "Owner"
+      },
+      "enforced_for": {
+        "@@assign": [
+          "ec2:instance",
+          "ec2:volume",
+          "rds:db",
+          "s3"
+        ]
+      }
+    }
+  }
+}

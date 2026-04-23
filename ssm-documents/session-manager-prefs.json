@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0",
+  "description": "An Post PAD Environment - Secure Session Manager Preferences",
+  "sessionType": "Standard_Stream",
+  "inputs": {
+    "s3EncryptionEnabled": true,
+    "cloudWatchEncryptionEnabled": true,
+    "idleSessionTimeout": "20",
+    "maxSessionDuration": "120",
+    "runAsEnabled": false,
+    "shellProfile": {
+      "windows": "echo ATTENTION: You are entering the An Post Eircode PAD Environment. All actions are monitored, encrypted, and logged for auditing purposes.",
+      "linux": "echo ATTENTION: You are entering the An Post Eircode PAD Environment. All actions are monitored, encrypted, and logged for auditing purposes."
+    }
+  }
+}

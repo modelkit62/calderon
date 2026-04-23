@@ -1,0 +1,27 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowRDSViewAndConnect",
+      "Effect": "Allow",
+      "Action": [
+        "rds:Describe*",
+        "rds:ListTagsForResource",
+        "rds-db:connect"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowEC2ViewAndSSM",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeImages",
+        "ec2:DescribeTags",
+        "ec2:DescribeSnapshots",
+        "ssm:StartSession"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+###############################################################################################################
+# For additional configurable services, features, and property descriptions,                                  #
+# please review the GlobalConfig class reference in our TypeDoc:                                              #
+# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#global-configuration    #
+###############################################################################################################
+
+# LZA Universal Configuration v1.1.0 is based on LZA v1.15.0
+
+# -----------------------------------------------------------------------------------------
+# AWS Landing Zone Accelerator - Global Configuration
+# Project: An Post Eircode Service Take-on (Test Environment)
+# -----------------------------------------------------------------------------------------
+
+# The primary region where core services are deployed (Ireland)
+homeRegion: &HOME_REGION eu-west-1
+enabledRegions:
+  - *HOME_REGION
+
+# Role required for AWS Control Tower integration
+managementAccountAccessRole: AWSControlTowerExecution
+
+# Enable integration with AWS Control Tower, which acts as the orchestration layer
+controlTower:
+  enable: true
+
+# Centralized Log configuration in the Log Archive account
+logging:
+  account: LogArchive
+  cloudtrail:
+    enable: true
+    organizationTrail: true # Ensures CloudTrail tracks all accounts in the organization
+  sessionManager:
+    sendToCloudWatchLogs: true
+    sendToS3: true
+
+# Cost Management (Proactive FinOps and Guardrails)
+# Deployment of AWS Budgets to alert the management team if spending exceeds the allocation
+budgets:
+  - name: anpost-landing-zone-budget
+    timeUnit: MONTHLY
+    type: COST
+    # Estimated base amount according to the HLD for Phase 1 ($543 - $679.50)
+    amount: 700
+    includeUpfront: true
+    includeTax: true
+    includeSupport: true
+    includeSubscription: true
+    includeRecurring: true
+    includeOtherSubscription: true
+    includeDiscount: true
+    includeCredit: false
+    includeRefund: false
+    subscribers:
+      - subscriptionType: EMAIL
+        address: pilarternera1967@gmail.com # Management Account email

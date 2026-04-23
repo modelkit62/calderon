@@ -1,0 +1,52 @@
+###############################################################################################################
+# For additional configurable services, features, and property descriptions,                                  #
+# please review the AccountConfig class reference in our TypeDoc:                                             #
+# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#account-configuration   #
+###############################################################################################################
+
+# -----------------------------------------------------------------------------------------
+# AWS Landing Zone Accelerator - Accounts Configuration
+# Project: An Post Eircode Service Take-on (Test Environment)
+# -----------------------------------------------------------------------------------------
+
+mandatoryAccounts:
+  - name: Management
+    description: "This is the primary account of the AWS Organisation and the central point for billing, Service Control Policies (SCPs), and overall management of other AWS accounts."
+    email: pilarternera1967@gmail.com
+    organizationalUnit: Root
+
+  - name: LogArchive
+    description: "A dedicated account for long-term, immutable storage of all organisational and operational logs. This includes CloudTrail logs, S3 access logs and VPC Flow Logs."
+    email: pilarternera1967+logarchive@gmail.com
+    organizationalUnit: Security
+
+  - name: Audit
+    description: "A highly restricted, dedicated account for centralising all security and compliance-related logs and resources. This includes consolidating AWS Config recordings, GuardDuty findings, and Security Hub aggregates."
+    email: pilarternera1967+audit@gmail.com
+    organizationalUnit: Security
+
+workloadAccounts:
+  - name: Network
+    description: "Dedicated for centralising network infrastructure that spans multiple accounts across the entire organisation. This includes AWS Transit Gateway, centralised egress points, and shared DNS services."
+    email: pilarternera1967+networking@gmail.com
+    organizationalUnit: Infrastructure
+
+  - name: SharedServices
+    description: "This account centralizes shared IT infrastructure services that are consumed by multiple workloads across the organization, preventing duplication of services."
+    email: pilarternera1967+ss@gmail.com
+    organizationalUnit: Infrastructure
+
+  - name: Production-PAD
+    description: "Contains AWS accounts specifically allocated for live, mission-critical application deployments for the PAD data platform."
+    email: pilarternera1967+production@gmail.com
+    organizationalUnit: Production
+
+  - name: Non-Production-PAD
+    description: "Houses AWS accounts designated for development, testing, staging, and quality assurance environments for the PAD platform."
+    email: pilarternera1967+nonprod@gmail.com
+    organizationalUnit: Non-Production
+
+  - name: Sandbox
+    description: "Provides a safely managed environment for experimentation. Permissive access is allowed but is strictly governed by billing alarms and budget management."
+    email: pilarternera1967+sandbox@gmail.com
+    organizationalUnit: Sandbox

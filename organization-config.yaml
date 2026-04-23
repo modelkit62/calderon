@@ -1,0 +1,54 @@
+#######################################################################################################################
+# For additional configurable services, features, and property descriptions,                                          #
+# please review the OrganizationConfig class reference in our TypeDoc:                                                #
+# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#aws-organizations-configuration #
+#######################################################################################################################
+
+# -----------------------------------------------------------------------------------------
+# AWS Landing Zone Accelerator - Organization Configuration
+# Project: An Post Eircode Service Take-on (Test Environment)
+# -----------------------------------------------------------------------------------------
+enable: true
+
+# Service Control Policies (SCPs) definition
+serviceControlPolicies:
+  - name: Quarantine-DenyAll-SCP
+    description: "Strict SCP explicitly denies all access to these accounts except for designated Admin and Security staff."
+    policy: service-control-policies/quarantine-deny-all.json
+    deploymentTargets:
+      organizationalUnits:
+        - Quarantine
+        
+  - name: Enforce-Mandatory-Tags-SCP
+    description: "Enforces comprehensive Tagging Policy from Day 1 (CostCentre, Environment, Owner)."
+    policy: service-control-policies/require-mandatory-tags.json
+    deploymentTargets:
+      organizationalUnits:
+        - Security
+        - Infrastructure
+        - Workloads
+        - Production
+        - Non-Production
+        - Sandbox
+
+# AWS Backup Policies definition
+backupPolicies:
+  - name: RDS-Nightly-30-Days-Policy
+    description: "Automated nightly Amazon RDS backups with a 30-day retention period."
+    policy: backup-policies/rds-nightly-30-days.json
+    deploymentTargets:
+      organizationalUnits:
+        - Workloads
+
+# Organizational Units (OUs) hierarchy definition
+organizationalUnits:
+  - name: Quarantine
+  - name: Security
+  - name: Infrastructure
+  - name: Workloads
+  - name: Production
+    parent: Workloads
+  - name: Non-Production
+    parent: Workloads
+  - name: Sandbox
+    parent: Workloads

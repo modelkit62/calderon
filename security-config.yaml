@@ -1,0 +1,58 @@
+##############################################################################################################
+# For detailed information about Included Services, Features, and Configuration References,                  #
+# please review the SecurityConfig class reference in our TypeDoc:                                           #
+# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#security-configuration #
+##############################################################################################################
+
+# -----------------------------------------------------------------------------------------
+# AWS Landing Zone Accelerator - Security Configuration
+# Project: An Post Eircode Service Take-on (Test Environment)
+# -----------------------------------------------------------------------------------------
+
+# AWS Config configuration for resource auditing
+awsConfig:
+  enable: true
+  aggregation:
+    # Information is consolidated in the Audit account
+    delegatedAdminAccount: Audit
+
+# Centralized security services configuration
+centralSecurityServices:
+  # Enables security services management through delegated Audit account
+  delegatedAdminAccount: Audit
+
+  # Amazon Elastic Block Store Encryption (Aligns with encryption at rest requirement)
+  ebsDefaultVolumeEncryption:
+    enable: true
+    excludeRegions: []
+
+  # Amazon Simple Storage Service Public Access block
+  s3PublicAccessBlock:
+    enable: true
+    excludeAccounts: []
+
+  # Service Control Policies (SCPs) integrity enforcement
+  scpRevertChangesConfig:
+    enable: true
+
+  # Note: Amazon Macie is omitted as no PII is processed by the PAD platform.
+
+  # Continuous threat detection using native AWS telemetry
+  guardduty:
+    enable: true
+    exportConfiguration:
+      enable: true
+      # Immutable export to the Log Archive account for long-term retention
+      destination: LogArchive
+    s3Protection:
+      enable: true
+
+  # Central panel for security posture and compliance
+  securityHub:
+    enable: true
+    regionAggregation: true
+    standards:
+      # Activation of recommended foundational AWS security standards
+      - name: AWS Foundational Security Best Practices v1.0.0
+        enable: true
+
