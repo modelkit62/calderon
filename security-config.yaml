@@ -3,6 +3,7 @@ awsConfig:
   aggregation:
     enable: false
     delegatedAdminAccount: Audit
+  ruleSets: []
 
 accessAnalyzer:
   enable: false
