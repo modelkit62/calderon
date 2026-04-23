@@ -38,7 +38,7 @@ workloadAccounts:
 
   - name: Production-PAD
     description: "Contains AWS accounts specifically allocated for live, mission-critical application deployments for the PAD data platform."
-    email: pilarternera1967+production@gmail.com
+    email: pilarternera1967+prod-nueva@gmail.com
     organizationalUnit: Production
 
   - name: Non-Production-PAD
