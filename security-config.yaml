@@ -12,36 +12,45 @@
 
 # AWS Config configuration for resource auditing
 awsConfig:
-  # Requerido por el error: 'enableConfigurationRecorder'
   enableConfigurationRecorder: true
   aggregation:
-    # Requerido por el error: la agregación necesita su propio 'enable'
     enable: true
     delegatedAdminAccount: Audit
 
+# AÑADIDO: El validador exige una política de contraseñas por defecto
+iamPasswordPolicy:
+  requireMinimumLength: 14
+  passwordReusePrevention: 24
+  requireLowercaseCharacters: true
+  requireNumbers: true
+  requireSymbols: true
+  requireUppercaseCharacters: true
+  allowUsersToChangePassword: true
+  maxPasswordAge: 90
+
 centralSecurityServices:
   delegatedAdminAccount: Audit
-
+  
   ebsDefaultVolumeEncryption:
     enable: true
     excludeRegions: []
-
+    
   s3PublicAccessBlock:
     enable: true
     excludeAccounts: []
-
+    
   scpRevertChangesConfig:
     enable: true
 
-  # Requerido por el esquema, aunque no lo uses, debes ponerlo explícitamente en 'false'
   macie:
     enable: false
+    # AÑADIDO: Exigencia del validador aunque Macie esté en false
+    publishSensitiveDataFindings: false
 
   guardduty:
     enable: true
     exportConfiguration:
       enable: true
-      # Requeridos por el error: destinationType y exportFrequency
       destinationType: S3
       exportFrequency: FIFTEEN_MINUTES
     s3Protection:
@@ -54,11 +63,13 @@ centralSecurityServices:
       - name: AWS Foundational Security Best Practices v1.0.0
         enable: true
 
-  # Requerido por el error: ssmAutomation debe estar definido
   ssmAutomation:
     enable: true
+    # AÑADIDO: Exigencia del validador (lista vacía)
+    documentSets: []
 
-# Requerido por el error en la raíz del documento
 cloudWatch:
   encryption:
     enabled: true
+  # AÑADIDO: Exigencia del validador (lista vacía)
+  alarmSets: []
