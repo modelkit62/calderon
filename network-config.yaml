@@ -9,6 +9,7 @@ transitGateways:
     asn: 65000
     autoAcceptSharingAttachments: enable
     defaultRouteTablePropagation: disable
+    defaultRouteTableAssociation: disable
     routeTables: []
     shareTargets:
       organizationalUnits:
