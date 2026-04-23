@@ -2,6 +2,8 @@ homeRegion: &HOME_REGION eu-west-1
 enabledRegions:
   - *HOME_REGION
 
+cloudwatchLogRetentionInDays: 365
+
 managementAccountAccessRole: AWSControlTowerExecution
 
 controlTower:
