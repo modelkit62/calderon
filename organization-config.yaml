@@ -29,7 +29,6 @@ serviceControlPolicies:
     type: customerManaged # ¡NUEVO! Campo obligatorio
     deploymentTargets:
       organizationalUnits:
-        - Security
         - Infrastructure
         - Workloads
         - Production
