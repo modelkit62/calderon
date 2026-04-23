@@ -1,26 +1,12 @@
-##############################################################################################################
-# For detailed information about Included Services, Features, and Configuration References,                  #
-# please review the SecurityConfig class reference in our TypeDoc:                                           #
-# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#security-configuration #
-##############################################################################################################
-
-
-# -----------------------------------------------------------------------------------------
-# AWS Landing Zone Accelerator - Security Configuration
-# Project: An Post Eircode Service Take-on (Test Environment)
-# -----------------------------------------------------------------------------------------
-
 awsConfig:
   enableConfigurationRecorder: true
   aggregation:
-    enable: true
+    enable: false
     delegatedAdminAccount: Audit
 
-# ¡NUEVO! Añadido Access Analyzer para calmar al validador
 accessAnalyzer:
   enable: false
 
-# ¡CORREGIDO! Con las variables exactas que pedía el log
 iamPasswordPolicy:
   minimumPasswordLength: 14
   hardExpiry: false
@@ -74,5 +60,4 @@ cloudWatch:
   encryption:
     enabled: true
   alarmSets: []
-  # ¡NUEVO! Añadido para calmar al validador
   metricSets: []
