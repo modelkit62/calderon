@@ -27,13 +27,13 @@ vpcs:
     internetGateway: true
     subnets:
       - name: Public-Subnet
-        availabilityZones: ['a', 'b']
+        availabilityZone: 'a'
         ipv4CidrBlock: 172.16.0.0/24
       - name: Firewall-Subnet
-        availabilityZones: ['a', 'b']
+        availabilityZone: 'a'
         ipv4CidrBlock: 172.16.1.0/24
       - name: TGW-Subnet
-        availabilityZones: ['a', 'b']
+        availabilityZone: 'a'
         ipv4CidrBlock: 172.16.2.0/24
     natGateways:
       - name: Egress-NAT-A
@@ -55,13 +55,13 @@ vpcs:
       - 10.100.0.0/16
     subnets:
       - name: Private-Subnet-App
-        availabilityZones: ['a', 'b']
+        availabilityZone: 'a'
         ipv4CidrBlock: 10.100.1.0/24
       - name: Private-Subnet-Data
-        availabilityZones: ['a', 'b']
+        availabilityZone: 'a'
         ipv4CidrBlock: 10.100.2.0/24
       - name: TGW-Subnet
-        availabilityZones: ['a', 'b']
+        availabilityZone: 'a'
         ipv4CidrBlock: 10.100.3.0/24
     transitGatewayAttachments:
       - name: PAD-Prod-TGW-Attach
