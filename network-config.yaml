@@ -1,34 +1,21 @@
-# -----------------------------------------------------------------------------------------
-# AWS Landing Zone Accelerator - Network Configuration
-# Project: An Post Eircode Service Take-on (Test Environment - Hub & Spoke Topology)
-# -----------------------------------------------------------------------------------------
-
-# 1. Transit Gateway Configuration (The central router)
 transitGateways:
   - name: Central-TGW
     account: Network
     region: eu-west-1
     asn: 65000
     autoAcceptSharedAttachments: enable
-    # Share the TGW with Infrastructure and Workloads OUs
     shareTargets:
       organizationalUnits:
         - Infrastructure
         - Workloads
 
-# 2. VPCs Configuration
 vpcs:
-  # ========================================================================
-  # THE HUB NETWORK: Egress VPC (In the Network account)
-  # ========================================================================
   - name: Egress-VPC
     account: Network
     region: eu-west-1
     cidrs:
-      - 172.16.0.0/16 # CIDR based on the HLD diagram
+      - 172.16.0.0/16
     internetGateway: true
-    
-    # Subnets required by the HLD inspection architecture
     subnets:
       - name: Public-Subnet
         availabilityZones: ['a', 'b']
@@ -39,32 +26,22 @@ vpcs:
       - name: TGW-Subnet
         availabilityZones: ['a', 'b']
         ipv4CidrBlock: 172.16.2.0/24
-
-    # NAT Gateways in the public subnet
     natGateways:
       - name: Egress-NAT-A
         subnet: Public-Subnet
         availabilityZone: 'a'
-
-    # Connection of this VPC to the central Transit Gateway
     transitGatewayAttachments:
       - name: Egress-TGW-Attach
         transitGateway: Central-TGW
         subnets: 
           - TGW-Subnet
-        # Enable appliance mode for symmetric traffic flow through the firewall
         applianceModeSupport: enable
 
-  # ========================================================================
-  # THE SPOKE NETWORK: Production PAD VPC (In the Production-PAD account)
-  # ========================================================================
   - name: PAD-VPC-Prod
     account: Production-PAD
     region: eu-west-1
     cidrs:
-      - 10.100.0.0/16 # Example CIDR for Production
-    
-    # 100% Private subnets to host RDS and EC2
+      - 10.100.0.0/16
     subnets:
       - name: Private-Subnet-App
         availabilityZones: ['a', 'b']
@@ -75,15 +52,11 @@ vpcs:
       - name: TGW-Subnet
         availabilityZones: ['a', 'b']
         ipv4CidrBlock: 10.100.3.0/24
-
-    # Connection of the Production VPC to the Transit Gateway
     transitGatewayAttachments:
       - name: PAD-Prod-TGW-Attach
         transitGateway: Central-TGW
         subnets:
           - TGW-Subnet
-
-    # Route tables: All outbound traffic is sent to the TGW
     routeTables:
       - name: PAD-Prod-Private-RT
         subnets:
@@ -92,8 +65,6 @@ vpcs:
         routes:
           - destination: 0.0.0.0/0
             target: Central-TGW
-
-    # VPC Gateway Endpoint for S3 to save costs (Bypassing NAT)
     vpcEndpoints:
       - service: s3
         type: Gateway
@@ -101,7 +72,6 @@ vpcs:
           - PAD-Prod-Private-RT
         policy: vpc-endpoint-policies/s3-gateway-endpoint-policy.json
 
-# 3. AWS Network Firewall Configuration (Centralized Inspection)
 centralNetworkServices:
   networkFirewall:
     firewalls:
@@ -114,5 +84,4 @@ centralNetworkServices:
         firewallPolicy:
           statelessDefaultActions: ['aws:forward_to_sfe']
           statelessFragmentDefaultActions: ['aws:forward_to_sfe']
-          # Empty stateful rule groups for Phase 1 basic setup
           statefulRuleGroups: []
