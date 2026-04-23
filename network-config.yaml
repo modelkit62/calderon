@@ -10,6 +10,8 @@ transitGateways:
     autoAcceptSharingAttachments: enable
     defaultRouteTablePropagation: disable
     defaultRouteTableAssociation: disable
+    vpnEcmpSupport: enable
+    dnsSupport: enable
     routeTables: []
     shareTargets:
       organizationalUnits:
