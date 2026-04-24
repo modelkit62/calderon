@@ -56,5 +56,5 @@ organizationalUnits:
     parent: Workloads
   - name: Sandbox
     parent: Workloads
-  - name: Suspended
+  - name: Cementry
     ignore: true
