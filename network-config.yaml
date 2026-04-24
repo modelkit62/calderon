@@ -17,6 +17,9 @@ transitGateways:
       organizationalUnits:
         - Infrastructure
         - Workloads
+        - Production      
+        - Non-Production   
+        - Sandbox
 
 vpcs:
   - name: Egress-VPC
