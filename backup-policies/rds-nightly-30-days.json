@@ -8,24 +8,40 @@
          },
          "rules":{
             "Nightly-30-Day-Rule":{
-               "schedule_expression":"cron(0 2 * * ? *)",
-               "start_window_minutes":60,
-               "completion_window_minutes":180,
-               "lifecycle":{
-                  "delete_after_days":30
+               "schedule_expression":{
+                  "@@assign":"cron(0 2 * * ? *)"
                },
-               "target_backup_vault_name":"Default"
+               "start_window_minutes":{
+                  "@@assign":"60"
+               },
+               "completion_window_minutes":{
+                  "@@assign":"180"
+               },
+               "lifecycle":{
+                  "@@assign":{
+                     "delete_after_days":30
+                  }
+               },
+               "target_backup_vault_name":{
+                  "@@assign":"Default"
+               }
             }
          },
          "selections":{
             "tags":{
                "PAD-Databases":{
-                  "iam_role_arn":"arn:aws:iam::$account:role/aws-service-role/backup.amazonaws.com/AWSServiceRoleForBackup",
-                  "tag_key":"Environment",
-                  "tag_value":[
-                     "Production",
-                     "Non-Production"
-                  ]
+                  "iam_role_arn":{
+                     "@@assign":"arn:aws:iam::$account:role/aws-service-role/backup.amazonaws.com/AWSServiceRoleForBackup"
+                  },
+                  "tag_key":{
+                     "@@assign":"Environment"
+                  },
+                  "tag_value":{
+                     "@@assign":[
+                        "Production",
+                        "Non-Production"
+                     ]
+                  }
                }
             }
          }
