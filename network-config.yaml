@@ -109,3 +109,8 @@ centralNetworkServices:
         subnets:
           - Firewall-Subnet
         firewallPolicy: AnPost-Central-Firewall-Policy
+        loggingConfiguration:
+          - destination: cloud-watch-logs
+            type: ALERT
+          - destination: cloud-watch-logs
+            type: FLOW
