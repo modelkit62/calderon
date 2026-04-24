@@ -12,14 +12,14 @@
                   "@@assign":"cron(0 2 * * ? *)"
                },
                "start_window_minutes":{
-                  "@@assign":"60"
+                  "@@assign":60
                },
                "completion_window_minutes":{
-                  "@@assign":"180"
+                  "@@assign":180
                },
                "lifecycle":{
                   "delete_after_days":{
-                     "@@assign":"30"
+                     "@@assign":30
                   }
                },
                "target_backup_vault_name":{
