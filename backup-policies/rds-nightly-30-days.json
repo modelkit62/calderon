@@ -11,10 +11,10 @@
                "schedule_expression":{
                   "@@assign":"cron(0 2 * * ? *)"
                },
-               "start_window_minutes":{
+               "start_backup_window_minutes":{
                   "@@assign":"60"
                },
-               "completion_window_minutes":{
+               "complete_backup_window_minutes":{
                   "@@assign":"180"
                },
                "lifecycle":{
