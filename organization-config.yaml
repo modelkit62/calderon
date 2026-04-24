@@ -28,12 +28,7 @@ serviceControlPolicies:
     policy: service-control-policies/require-mandatory-tags.json
     type: customerManaged # ¡NUEVO! Campo obligatorio
     deploymentTargets:
-      organizationalUnits:
-        - Infrastructure
-        - Workloads
-        - Production
-        - Non-Production
-        - Sandbox
+      organizationalUnits: []
 
 # AWS Backup Policies definition
 backupPolicies:
