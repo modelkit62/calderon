@@ -10,7 +10,6 @@
 # -----------------------------------------------------------------------------------------
 enable: true
 
-# ¡NEW!
 taggingPolicies: []
 
 # Service Control Policies (SCPs) definition
