@@ -1,3 +1,13 @@
+###############################################################################################################
+# For additional configurable services, features, and property descriptions,                                  #
+# please review the AccountConfig class reference in our TypeDoc:                                             #
+# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#account-configuration   #
+###############################################################################################################
+
+# -----------------------------------------------------------------------------------------
+# AWS Landing Zone Accelerator - Accounts Configuration
+# Project: An Post Eircode Service Take-on (Test Environment)
+# -----------------------------------------------------------------------------------------
 homeRegion: &HOME_REGION eu-west-1
 enabledRegions:
   - *HOME_REGION
