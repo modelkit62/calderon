@@ -1,12 +1,12 @@
-########################################################################################################################################
-# For additional configurable services, features, and property descriptions,                                                           #
-# please review class GlobalConfig reference in our TypeDoc:                                                                           #
-# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#identity-and-access-management-iam-configuration #
-########################################################################################################################################
+###############################################################################################################
+# For additional configurable services, features, and property descriptions,                                  #
+# please review the AccountConfig class reference in our TypeDoc:                                             #
+# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#account-configuration   #
+###############################################################################################################
 
 # -----------------------------------------------------------------------------------------
-# AWS Landing Zone Accelerator - IAM Configuration
-# Project: An Post Eircode Service Take-on (Test Environment)
+# AWS Landing Zone Accelerator - Accounts Configuration
+# Project: AP Eircode Service Take-on (Test Environment)
 # -----------------------------------------------------------------------------------------
 
 # Definition of custom policies (Customer-managed policies)
