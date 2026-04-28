@@ -1,3 +1,13 @@
+###############################################################################################################
+# For additional configurable services, features, and property descriptions,                                  #
+# please review the AccountConfig class reference in our TypeDoc:                                             #
+# https://awslabs.github.io/landing-zone-accelerator-on-aws/latest/user-guide/config/#account-configuration   #
+###############################################################################################################
+
+# -----------------------------------------------------------------------------------------
+# AWS Landing Zone Accelerator - Accounts Configuration
+# Project: AP Eircode Service Take-on (Test Environment)
+# -----------------------------------------------------------------------------------------
 defaultVpc:
   delete: true
 endpointPolicies: []
