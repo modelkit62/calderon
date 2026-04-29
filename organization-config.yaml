@@ -28,6 +28,12 @@ serviceControlPolicies:
     type: customerManaged
     deploymentTargets:
       organizationalUnits: []
+        # - Security
+        # - Infrastructure
+        # - Workloads
+        # - Production
+        # - Non-Production
+        # - Sandbox
 
 # AWS Backup Policies definition
 backupPolicies:
